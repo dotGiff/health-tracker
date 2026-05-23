@@ -1,0 +1,3 @@
+# SQLite on a single Fly.io machine, never auto-scaled
+
+The API deploys to exactly one Fly.io machine and must never be auto-scaled. SQLite is a file on a persistent volume — concurrent writes from multiple processes corrupt the database. A single machine eliminates that risk entirely. Postgres with a managed service was the obvious alternative; it was rejected because this is a personal app with one active user, operational simplicity matters more than scalability, and Litestream continuous replication to Tigris covers data durability. If multi-user scale ever becomes a requirement, migrating to Postgres is the path forward.
